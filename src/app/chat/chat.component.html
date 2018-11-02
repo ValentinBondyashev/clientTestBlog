@@ -1,0 +1,13 @@
+<mat-card>
+  <div class="block-messages">
+    <div *ngFor="let message of messages; let i = index">
+      <p><span class="nick">{{message?.nickName}}</span>{{message?.message}}</p>
+    </div>
+  </div>
+  <form [formGroup]="messageGroup" (submit)="submit()" class="message-form">
+    <mat-form-field class="example-full-width">
+      <input class="message-input" formControlName="message" matInput placeholder="Your message" />
+    </mat-form-field>
+    <button mat-icon-button><mat-icon>send</mat-icon></button>
+  </form>
+</mat-card>

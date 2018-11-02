@@ -1,0 +1,24 @@
+<mat-card class="wrap">
+  <h1>Registration</h1>
+  <form class="register_form" [formGroup]="registerForm" (submit)="submit()" >
+    <mat-form-field>
+      <input required matInput
+             [formControlName]="'nickName'"
+             type="text" placeholder="Name">
+    </mat-form-field>
+    <mat-form-field>
+      <input required matInput
+             [formControlName]="'email'"
+             type="text" placeholder="Email"
+             required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}">
+    </mat-form-field>
+    <mat-form-field>
+      <input required matInput
+             [formControlName]="'password'"
+             type="password"
+             placeholder="Password"
+             required pattern="[A-Za-z,0-9]{8,20}">
+    </mat-form-field>
+    <button mat-raised-button [disabled]="registerForm.invalid" color="primary">Registration</button>
+  </form>
+</mat-card>

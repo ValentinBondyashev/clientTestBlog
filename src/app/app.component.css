@@ -1,0 +1,22 @@
+.title{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    padding: 10px;
+    color: white;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.active{
+    color: #d6d8d7
+}
+
+.logout{
+  margin: 10px;
+  cursor: pointer;
+}

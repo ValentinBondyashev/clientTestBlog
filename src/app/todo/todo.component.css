@@ -1,0 +1,29 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+.todo_bar{
+    height: 100px;
+}
+
+.wrapper{
+    display: flex;
+    justify-content: center
+}
+
+.task_date{
+  margin: 20px;
+}
+
+.todo_block{
+    width: 700px;
+}
+
+.card{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer{
+    border-top: 2px solid #eaeaea
+}

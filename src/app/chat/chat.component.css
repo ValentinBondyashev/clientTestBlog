@@ -1,0 +1,27 @@
+.block-messages{
+  overflow-y:scroll;
+  width: 95%;
+  height: 60vh;
+  border: 2px solid #eaeaea;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.nick{
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.message-form{
+  width: 95%;
+  margin: 0 auto;
+
+}
+
+.example-full-width{
+  width: 95%;
+  margin: 0 auto;
+}

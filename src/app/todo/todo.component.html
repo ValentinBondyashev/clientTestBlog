@@ -1,0 +1,39 @@
+<div class="wrapper">
+  <div class="todo_block">
+    <mat-toolbar class="todo_bar">
+      <form [formGroup]="form" (submit)="submit()" novalidate>
+        <mat-form-field>
+          <input matInput formControlName="taskList" placeholder="Your task">
+        </mat-form-field>
+        <button mat-icon-button><mat-icon>playlist_add</mat-icon></button>
+      </form>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+    <mat-accordion>
+      <div *ngFor="let task of tasks; let i = index">
+          <mat-card class="card">
+            <ng-container *ngIf="task['edit'] === false; else elseTemplate">
+             <div>
+              <button mat-icon-button (click)="edit(i)"><mat-icon>edit</mat-icon></button>
+              <span class="task_name">{{task?.task}}</span>
+               <span class="task_date">{{task?.dateCreated | date}}</span>
+             </div>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <form [formGroup]="form" (submit)="save(task['_id'], i)" novalidate>
+                <mat-form-field>
+                  <input matInput formControlName="taskName" value={{task.name}} placeholder="change your task">
+                </mat-form-field>
+                <button mat-icon-button><mat-icon>save_alt</mat-icon></button>
+              </form>
+            </ng-template>
+            <span class="task_time">{{task?.time | date}}</span>
+            <button mat-icon-button (click)="deleteTask(task['_id'])"><mat-icon>highlight_off</mat-icon></button>
+          </mat-card>
+      </div>
+    </mat-accordion>
+    <mat-toolbar class="footer">
+      <h3>Number of tasks: {{tasks?.length}}</h3>
+    </mat-toolbar>
+  </div>
+</div>
