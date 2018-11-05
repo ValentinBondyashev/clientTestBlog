@@ -1,0 +1,9 @@
+<div class='post' >
+  <div class='user_info'>
+    <div class='user_avatar'></div>
+    <span class='user_name'>{{post?.userName}}</span>
+    <span class='post_date'>{{post?.dateCreated | date}}</span>
+  </div>
+  <h3 class='post_title'>{{post?.title}} <button *ngIf="post?.userId === userId" (click)="edit()" mat-icon-button><mat-icon>edit</mat-icon></button></h3>
+  <p class='post_text'>{{post?.text}} <button *ngIf="post?.userId === userId" mat-icon-button><mat-icon>edit</mat-icon></button></p>
+</div>

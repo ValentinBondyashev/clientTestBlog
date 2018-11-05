@@ -12,7 +12,7 @@ export class ChatService {
   constructor(private http: HttpClient) {}
 
   getAllMessages() {
-    return this.http.get( url + '/api/messages');
+    return this.http.get( url + '/api/z');
   }
 
   send(message) {

@@ -15,6 +15,10 @@ import {TodoGuard} from './todo/todo.guard';
 import { HomeComponent } from './home/home.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './chat/chat.service';
+import {BlogComponent} from './blog/blog.component';
+import {BlogService} from './blog/blog.service';
+import { PostComponent } from './post/post.component';
+import {PostService} from './post/post.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,8 @@ import { ChatService } from './chat/chat.service';
     LoginComponent,
     HomeComponent,
     ChatComponent,
+    BlogComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,7 @@ import { ChatService } from './chat/chat.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [TodoGuard, ChatService],
+  providers: [TodoGuard, ChatService, BlogService, PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

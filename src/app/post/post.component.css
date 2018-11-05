@@ -1,0 +1,28 @@
+.post{
+  width: 80%;
+  padding: 30px;
+  margin: 50px 0 0;
+}
+
+.user_avatar{
+  width: 30px;
+  height: 30px;
+  background: #64686d;
+  border-radius: 50%;
+}
+
+.user_name{
+  margin: 0 10px;
+}
+
+.post_date{
+  margin: 0 10px;
+  color: #c2c3c4;
+  font-size: 14px;
+  font-family: "DejaVu Sans";
+}
+
+.user_info{
+  display: flex;
+  align-items: center;
+}

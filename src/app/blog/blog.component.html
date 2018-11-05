@@ -1,0 +1,52 @@
+<div class='blog_container'>
+  <div class='list_post'>
+    <div style="display: flex; align-items: center;">
+      <span>Filter :</span>
+      <button (click)="filter()" mat-flat-button>Show only your posts</button>
+      <button (click)="getAllPosts()" mat-flat-button>Show all posts</button>
+    </div>
+    <div class='post' *ngFor="let post of posts">
+      <div class='user_info'>
+        <div class='user_avatar'></div>
+        <span class='user_name'>{{post?.userName}}</span>
+        <span class='post_date'>{{post?.dateCreated | date}}</span>
+        <div style="align-items: center; display: flex" *ngIf="post?.userId === userId">
+          <mat-icon >person</mat-icon>
+          <span>my post</span>
+        </div>
+
+      </div>
+      <h3 class='post_title'>{{post?.title}}</h3>
+      <p class='post_text'>{{post?.text.length > 1000 ? post.text.substring(0,1000) + '...' : post.text }}</p>
+      <div class='btn_read_more' (click)="readMore(post?._id)">Read more...</div>
+    </div>
+    <mat-card *ngIf="userId" class='card_post' >
+      <h3>You can to create your post:</h3>
+      <form [formGroup]="postForm" class='form' (submit)="createPost()" action="">
+        <mat-form-field>
+          <input [formControlName]="'title'" matInput placeholder="Title your post">
+        </mat-form-field>
+
+        <mat-form-field>
+          <textarea [formControlName]="'post'"  rows="10" matInput placeholder="Your post"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" >Create post</button>
+      </form>
+    </mat-card>
+  </div>
+
+  <article class='side_bar'>
+    <div class='news'>
+      <p class='news_text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dignissimos dolore, eaque enim ex iure natus necessitatibus neque nobis officia quis quos reprehenderit sequi temporibus, velit veniam vitae voluptate voluptates.</p>
+      <a class='read_more' href="/">Read more...</a>
+    </div>
+    <div class='news'>
+      <p class='news_text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dignissimos dolore, eaque enim ex iure natus necessitatibus neque nobis officia quis quos reprehenderit sequi temporibus, velit veniam vitae voluptate voluptates.</p>
+      <a class='read_more' href="/">Read more...</a>
+    </div>
+    <div class='news'>
+      <p class='news_text'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis dignissimos dolore, eaque enim ex iure natus necessitatibus neque nobis officia quis quos reprehenderit sequi temporibus, velit veniam vitae voluptate voluptates.</p>
+      <a class='read_more' href="/">Read more...</a>
+    </div>
+  </article>
+</div>
