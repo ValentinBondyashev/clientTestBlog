@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from './blog.service';
 import { Router } from '@angular/router';
-import {FormControl, FormGroup} from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { roles } from '../constants';
 
 @Component({
   selector: 'app-blog',
@@ -12,29 +13,35 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class BlogComponent implements OnInit {
   private posts;
   private userId;
+  private countPosts;
+  private userRole;
+  private permission;
+
   public postForm: FormGroup = new FormGroup({
     title: new FormControl(),
     post: new FormControl()
   });
+
   constructor(private blogService: BlogService, private router: Router) {}
 
-  filter() {
-    this.posts = this.posts.filter(post => post.userId === this.userId);
+  ngOnInit() {
+    this.getPosts( 1 );
+    this.userId = localStorage.getItem('id');
+    this.userRole = localStorage.getItem('role');
+    this.permission = Number(this.userRole) === roles.admin || Number(this.userRole) === roles.editor;
   }
 
-  getAllPosts() {
-    this.blogService.getAllPosts().subscribe(data => {
+  getPosts(page) {
+    this.blogService.getPosts(page).subscribe(data => {
       this.posts = data['posts'];
+      this.countPosts = data['countPosts'];
     });
   }
 
-  ngOnInit() {
-    this.userId = localStorage.getItem('id');
-    this.getAllPosts();
-  }
-
-  readMore(id) {
-    this.router.navigate([`post/${id}`]);
+  deletePost(id) {
+    this.blogService.deletePost(id).subscribe(data => {
+      this.posts = this.posts.filter(post => post['_id'] !== data['post']['_id']);
+    });
   }
 
   createPost() {
@@ -47,8 +54,22 @@ export class BlogComponent implements OnInit {
         userId: localStorage.getItem('id')
       }
     };
-    this.blogService.createPost(body).subscribe( data => this.posts.push(data.post));
+    this.blogService.createPost(body).subscribe( data => {
+      this.posts.push(data['post']);
+    });
     this.postForm.reset();
+  }
+
+  filter() {
+    this.posts = this.posts.filter(post => post.userId === this.userId);
+  }
+
+  readMore(id) {
+    this.router.navigate([`post/${id}`]);
+  }
+
+  changePage(e) {
+    this.getPosts( e['pageIndex'] + 1 );
   }
 
 }

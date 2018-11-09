@@ -3,10 +3,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const url = 'http://localhost:8000';
 
+
 @Injectable()
 export class HttpService {
-
-  constructor(private http: HttpClient) { }
+  private headers;
+  private token;
+  constructor(private http: HttpClient) {
+    this.token = localStorage.getItem('token');
+    this.headers = new HttpHeaders({ 'Authorization': `Token ${this.token}` });
+  }
 
   registretion(user) {
     const body = {
@@ -30,10 +35,7 @@ export class HttpService {
   }
 
   getAllTasks() {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({ 'Authorization': `Token ${token}` });
-
-    return this.http.get( url + '/api/tasks/', {headers});
+    return this.http.get( url + '/api/tasks/', {headers: this.headers});
   }
 
   createTask(task) {
@@ -45,18 +47,11 @@ export class HttpService {
         edit: task.edit
       }
     };
-    return this.http.post(url + '/api/tasks/task', body);
+    return this.http.post(url + '/api/tasks/task', body, {headers: this.headers});
   }
 
   deleteTask(id) {
-    const token = localStorage.getItem('token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': `Token ${token}`
-      })
-    };
-    return this.http.delete(url + '/api/tasks/' + id, httpOptions);
+    return this.http.delete(url + '/api/tasks/' + id, {headers: this.headers});
   }
 
   updateTask( task, id ) {
@@ -65,7 +60,7 @@ export class HttpService {
         id
     };
 
-    return this.http.post(url + '/api/tasks/update', body);
+    return this.http.post(url + '/api/tasks/update', body, {headers: this.headers});
   }
 
 }

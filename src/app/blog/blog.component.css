@@ -81,6 +81,10 @@
   align-items: center;
 }
 
+.user_info_wrap{
+  display: flex;
+  justify-content: space-between;
+}
 
 .card_post {
   width: 80%;

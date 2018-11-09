@@ -3,18 +3,28 @@
     <div style="display: flex; align-items: center;">
       <span>Filter :</span>
       <button (click)="filter()" mat-flat-button>Show only your posts</button>
-      <button (click)="getAllPosts()" mat-flat-button>Show all posts</button>
+      <button (click)="getPosts()" mat-flat-button>Show all posts</button>
     </div>
+    <mat-paginator style="width: 80%;" [length]="countPosts"
+                   [pageSize]="5"
+                   (page)="changePage($event)">
+    </mat-paginator>
     <div class='post' *ngFor="let post of posts">
-      <div class='user_info'>
-        <div class='user_avatar'></div>
-        <span class='user_name'>{{post?.userName}}</span>
-        <span class='post_date'>{{post?.dateCreated | date}}</span>
-        <div style="align-items: center; display: flex" *ngIf="post?.userId === userId">
-          <mat-icon >person</mat-icon>
-          <span>my post</span>
+      <div class='user_info_wrap' >
+        <div class='user_info'>
+          <div class='user_avatar'></div>
+          <span class='user_name'>{{post?.userName}}</span>
+          <span class='post_date'>{{post?.dateCreated | date}}</span>
+          <div style="align-items: center; display: flex" *ngIf="post?.userId === userId">
+            <mat-icon >person</mat-icon>
+            <span>my post</span>
+          </div>
         </div>
-
+        <div>
+          <button *ngIf="permission" mat-icon-button (click)="deletePost(post?._id)">
+            <mat-icon >close</mat-icon>
+          </button>
+        </div>
       </div>
       <h3 class='post_title'>{{post?.title}}</h3>
       <p class='post_text'>{{post?.text.length > 1000 ? post.text.substring(0,1000) + '...' : post.text }}</p>

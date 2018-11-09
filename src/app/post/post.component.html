@@ -4,6 +4,32 @@
     <span class='user_name'>{{post?.userName}}</span>
     <span class='post_date'>{{post?.dateCreated | date}}</span>
   </div>
-  <h3 class='post_title'>{{post?.title}} <button *ngIf="post?.userId === userId" (click)="edit()" mat-icon-button><mat-icon>edit</mat-icon></button></h3>
-  <p class='post_text'>{{post?.text}} <button *ngIf="post?.userId === userId" mat-icon-button><mat-icon>edit</mat-icon></button></p>
+  <div *ngIf="!edit; else loggedOut">
+    <h3 class='post_title'>{{post?.title}} <button *ngIf="post?.userId === userId" (click)="editPost()" mat-icon-button><mat-icon>edit</mat-icon></button></h3>
+    <p class='post_text'>{{post?.text}} </p>
+  </div>
+  <img src='http://localhost:8000/uploads{{path}}' alt="">
+  <ng-template #loggedOut>
+    <div class="edit_block">
+      <form class="edit_form" [formGroup]="postForm" (submit)="updatePost()">
+        <input [formControlName]="'title'" type="title" value="{{post?.title}}">
+        <textarea [formControlName]="'text'" name="text" value="{{post?.text}} " cols="30" rows="10"></textarea>
+        <button>Save changes</button>
+      </form>
+
+      <input type="file" name="image" id={{post?.userId}} ng2FileSelect [uploader]="uploader" />
+
+      <button type="button" class="btn btn-success btn-s"
+              (click)="uploader.uploadAll()"
+              [disabled]="!uploader.getNotUploadedItems().length" >
+        Upload an Image
+      </button>
+
+      <!--<form (submit)="upload($event)" enctype="multipart/form-data" id="fileinfo">-->
+        <!--<input type="hidden" id="post-id" name="postId">-->
+        <!--<input type="file" name="file" id="file" required />-->
+        <!--<button class="upload-button">Загрузить</button>-->
+      <!--</form>-->
+    </div>
+  </ng-template>
 </div>

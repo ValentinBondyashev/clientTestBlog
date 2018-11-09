@@ -7,6 +7,10 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   private nickName = localStorage.getItem('nickName');
+
+  uploadPhoto() {
+  }
+
   logout() {
     localStorage.clear();
     location.reload();

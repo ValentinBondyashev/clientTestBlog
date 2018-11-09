@@ -1,9 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material';
@@ -11,14 +12,14 @@ import { TodoComponent } from './todo/todo.component';
 import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
-import {TodoGuard} from './todo/todo.guard';
+import { TodoGuard } from './todo/todo.guard';
 import { HomeComponent } from './home/home.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatService } from './chat/chat.service';
-import {BlogComponent} from './blog/blog.component';
-import {BlogService} from './blog/blog.service';
+import { BlogComponent } from './blog/blog.component';
+import { BlogService } from './blog/blog.service';
 import { PostComponent } from './post/post.component';
-import {PostService} from './post/post.service';
+import { PostService } from './post/post.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {PostService} from './post/post.service';
     HomeComponent,
     ChatComponent,
     BlogComponent,
-    PostComponent
+    PostComponent,
+    FileSelectDirective
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,7 @@ import {PostService} from './post/post.service';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [TodoGuard, ChatService, BlogService, PostService],
   bootstrap: [AppComponent]
